@@ -1,0 +1,158 @@
+.spot-info-out-box {
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 12;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.spot-info-inner-box {
+    position: absolute;
+    width: 70%;
+    min-width: 800px;
+    height: 70%;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%, -20%);
+    z-index: 12;
+    background: #f8f8f8;
+    padding: 15px 20px 15px 20px;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.25);
+    overflow-y: auto;
+}
+.spot-info-inner-box::-webkit-scrollbar {
+    width: 5px; /* 스크롤바 너비 */
+}
+
+/* 스크롤바 트랙 스타일 */
+.spot-info-inner-box::-webkit-scrollbar-track {
+    background-color: #e8e8e8; /* 스크롤바 트랙 배경색 */
+}
+
+/* 스크롤바 핸들(손잡이) 스타일 */
+.spot-info-inner-box::-webkit-scrollbar-thumb {
+    background-color: #404040; /* 스크롤바 핸들 배경색 */
+}
+
+/* 스크롤바 핸들이 마우스 오버되었을 때 스타일 */
+.spot-info-inner-box::-webkit-scrollbar-thumb:hover {
+    background-color: #009855; /* 스크롤바 핸들 마우스 오버 배경색 */
+}
+.modal-close-container {
+    text-align: right;
+}
+
+.modal-close-container span {
+    cursor: pointer;
+    font-size: 2em;
+}
+
+.spot-info-inner-title-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.spot-info-inner-title-container div img {
+    width: 20px;
+}
+
+.spot-info-inner-title-container div:nth-child(3) {
+    align-self: flex-end;
+}
+
+.spot-info-inner-title-div {
+    width: 60%;
+    font-size: 1.3em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: "NotoSansKR-SemiBold-6", serif;
+}
+
+.spot-info-inner-title {
+    font-size: 1.2em;
+    margin: 0;
+    font-family: "NotoSansKR-SemiBold-6", serif;
+    text-align: center;
+    width: 100%;
+    background: none;
+}
+
+.spot-info-inner-explain-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.spot-info-inner-explain {
+    font-family: "NotoSansKR-Regular-4", serif;
+    background: none;
+    width: 95%;
+    height: 115px;
+    font-size: 1.1em;
+    border-radius: 5px;
+    padding: 10px;
+    resize: none;
+    word-wrap: break-word;
+    text-align: center;
+    overflow-y: auto;
+}
+
+.spot-info-inner-explain::-webkit-scrollbar {
+    width: 5px; /* 스크롤바 너비 */
+}
+
+/* 스크롤바 트랙 스타일 */
+.spot-info-inner-explain::-webkit-scrollbar-track {
+    background-color: #e8e8e8; /* 스크롤바 트랙 배경색 */
+}
+
+/* 스크롤바 핸들(손잡이) 스타일 */
+.spot-info-inner-explain::-webkit-scrollbar-thumb {
+    background-color: #404040; /* 스크롤바 핸들 배경색 */
+}
+
+/* 스크롤바 핸들이 마우스 오버되었을 때 스타일 */
+.spot-info-inner-explain::-webkit-scrollbar-thumb:hover {
+    background-color: #009855; /* 스크롤바 핸들 마우스 오버 배경색 */
+}
+
+.spot-address-warning {
+    font-size: 0.9em;
+}
+
+.spot-lat-lng-container p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.spot-address-container p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.spot-address-container p:nth-child(1) {
+    font-family: "NotoSansKR-SemiBold-6", serif;
+    font-size: 1.2em;
+}
+
+.spot-address-container p:nth-child(2) {
+    font-size: 1em;
+    margin-left: 20px;
+}
+.image-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 16px; /* 빈틈의 크기를 조절할 수 있습니다. */
+}
+
+.image-gallery img {
+    width: 100%;
+    height: auto;
+    display: block;
+}

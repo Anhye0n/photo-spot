@@ -1,0 +1,85 @@
+#spot-input {
+    width: 80%;
+    font-size: 1.1em;
+    padding: 10px 15px 10px 15px;
+    border: 3px solid #546094;
+    border-radius: 5px;
+    background: #f8f8f8;
+    font-family: "NotoSansKR-SemiBold-6", serif;
+    z-index: 9;
+    position: relative;
+}
+
+#label-box {
+    text-align: left;
+    margin-top: 20px;
+    margin-bottom: -8px;
+}
+
+label[for='spot-input'] {
+    margin-left: 25px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-family: "NotoSansKR-SemiBold-6", serif;
+    font-size: 1.1em;
+    background: #f8f8f8;
+    position: relative;
+    z-index: 10;
+}
+
+#spot-search-result-container {
+    margin-top: 20px;
+}
+
+#spot-search-result-container hr{
+    width: 90%;
+    border: 1px solid #e0e0e0;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.spot-search-result-box {
+    padding: 20px 25px 15px 25px;
+}
+
+.spot-search-result-title-box{
+    display: flex;
+    justify-content: space-between;
+}
+
+.spot-search-result-title-box div img{
+    width: 20px;
+}
+
+.spot-search-result-title-box div:nth-child(3){
+    align-self: flex-end;
+}
+
+.spot-search-result-title {
+    width: 60%;
+    font-size: 1.3em;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-align: center;
+    font-family: "NotoSansKR-SemiBold-6", serif;
+}
+
+.spot-search-result-address-title{
+    font-size: 0.9em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.spot-search-result-road-address {
+    font-size: 1.1em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 8px;
+}
+
+.spot-search-result-address {
+    font-size: 1.1em;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding-left: 8px;
+}
