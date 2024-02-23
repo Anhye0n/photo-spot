@@ -18,20 +18,20 @@
     font-size: 2.5em;
 }
 
-.spot-add-input-container{
+.spot-add-input-container {
     display: flex;
     justify-content: space-between;
 }
 
-.spot-add-input-container div img{
+.spot-add-input-container div img {
     width: 20px;
 }
 
-.spot-add-input-container div:nth-child(3){
+.spot-add-input-container div:nth-child(3) {
     align-self: flex-end;
 }
 
-.spot-add-input-div{
+.spot-add-input-div {
     width: 60%;
     font-size: 1.3em;
     margin-top: 10px;
@@ -147,6 +147,98 @@
     margin-left: 20px;
 }
 
-.spot-add-upload{
+.spot-add-upload {
     text-align: center;
+}
+
+.site-info-content-container {
+    text-align: center;
+}
+
+.site-info-version {
+    margin-top: -30px;
+    margin-bottom: 0;
+    font-size: 0.8em;
+}
+
+.site-info-content-container hr {
+    width: 20%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.site-info-title {
+    font-size: 2em;
+    font-family: "NotoSansKR-SemiBold-6", serif;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.site-info-title span {
+    font-size: 0.7em;
+    font-family: "NotoSansKR-Regular-4", serif;
+}
+
+.site-info-sub-title {
+    font-size: 1.5em;
+    margin-top: 10px;
+    font-family: "NotoSansKR-SemiBold-6", serif;
+}
+
+.site-info-sub-title span {
+    font-size: 0.7em;
+    margin-top: 10px;
+    font-family: "NotoSansKR-Regular-4", serif;
+}
+
+.site-info-my-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.site-info-my-info div {
+    display: flex;
+    align-items: center;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.site-info-my-info div span {
+    font-size: 1.7em;
+    cursor: pointer;
+}
+
+.site-info-my-info div img {
+    width: 27px;
+    cursor: pointer;
+}
+
+.site-info-explain-container {
+    text-align: left;
+    margin-top: 20px;
+    font-size: 1.1em;
+}
+
+.site-info-explain-title {
+    font-family: 'iceJaram-Rg', serif;
+    margin-top: 0;
+    text-align: center;
+    font-weight: bold;
+    font-size: 2em;
+}
+
+.site-info-explain {
+
+}
+
+.site-info-plan-container {
+    text-align: left;
+}
+
+.site-info-plan-container p:nth-child(1) {
+    margin-top: 0;
+    font-size: 1.5em;
+    font-family: "NotoSansKR-SemiBold-6", serif;
 }

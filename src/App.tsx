@@ -1,13 +1,13 @@
 import { useEffect, useState } from 'react'
 import '@assets/css/map.css'
 import SidebarLayout from '@pages/Sidebar/SidebarLayout.tsx'
-import AddButton from '@pages/AddButton.tsx'
+import AddButton from '@pages/SideButton/AddButton.tsx'
 import { requestApi } from '@plugins/apiSetting.ts'
 import markerImages from '@assets/images/spot-marker.webp'
 import SpotInfo from '@components/Modal/SpotInfo.tsx'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import AppLayout from '@src/AppLayout.tsx'
-import { useDispatch, useSelector } from 'react-redux'
+import InfoButton from '@pages/SideButton/InfoButton.tsx'
 
 const { kakao } = window
 
@@ -33,10 +33,6 @@ function App() {
 
    const navigate = useNavigate()
 
-   const state = useSelector((state) => state.markers)
-   const dispatch = useDispatch()
-
-   console.log('debug' + state)
    useEffect(() => {
       const script = document.createElement('script')
       script.async = true
@@ -62,6 +58,8 @@ function App() {
             kakao.maps.event.addListener(map, 'idle', () => {
                getSpot()
             })
+
+            getSpot()
          })
       })
    }, [])
@@ -129,10 +127,8 @@ function App() {
       for (let i = 0; i < markers.length; i++) {
          markers[i].setMap(null)
       }
-      // markers = []
-      setMarkers([])
+      setMarkers((prev)=> [])
    }
-
    return (
       <>
          <Routes>
@@ -144,8 +140,9 @@ function App() {
             </Route>
          </Routes>
          {/*{!!queryData.spotName && <SpotInfo spotList={spotList} />}*/}
-         {isView ? <AddButton map={map} markers={markers} setMarkers={setMarkers} geocoder={geocoder} /> : null}
-         {isView ? <SidebarLayout map={map} markers={markers} setMarkers={setMarkers} spotList={spotList} /> : null}
+         {isView ? <InfoButton /> : null}
+         {isView ? <AddButton map={map} geocoder={geocoder} /> : null}
+         {isView ? <SidebarLayout map={map} markers={markers} setMarkers={setMarkers} spotList={spotList} removeMarker={removeMarker}/> : null}
       </>
    )
 }

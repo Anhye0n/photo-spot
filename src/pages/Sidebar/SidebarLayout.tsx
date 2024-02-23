@@ -4,18 +4,37 @@ import SearchAddress from '@pages/Sidebar/SearchAddress.tsx'
 import '@assets/css/sidebar-layout.css'
 import SpotSearch from '@pages/Sidebar/SpotSearch.tsx'
 
-function SidebarLayout({ map, markers, setMarkers, spotList }: { map: any; markers: any; setMarkers: Function, spotList: any }) {
+function SidebarLayout({
+   map,
+   markers,
+   setMarkers,
+   spotList,
+}: {
+   map: any
+   markers: any
+   setMarkers: Function
+   spotList: any
+}) {
    const [menuName, setMenuName] = useState('spot')
    const [isShowSidebar, setIsShowSidebar] = useState(true)
 
+   const [searchMarkers, setSearchMarkers] = useState<any[]>([])
+
    useEffect(() => {
 
-      for (let i = 0; i < markers.length; i++) {
-         markers[i].setMap(null)
-      }
-      // markers = []
-      setMarkers([])
+      removeMarker()
+
    }, [menuName])
+
+   const removeMarker = () => {
+      if (searchMarkers.length !==0) {
+         for (let i = 0; i < searchMarkers.length; i++) {
+
+            searchMarkers[i].setMap(null);
+         }
+         setSearchMarkers((prev)=> [])
+      }
+   }
 
    const activeButton = {
       background: '#f8f8f8',
@@ -68,7 +87,7 @@ function SidebarLayout({ map, markers, setMarkers, spotList }: { map: any; marke
                </div>
             </div>
             {menuName === 'location' ? (
-               <SearchAddress map={map} markers={markers} setMarkers={setMarkers} />
+               <SearchAddress map={map} searchMarkers={searchMarkers} setSearchMarkers={setSearchMarkers} removeMarker={removeMarker}/>
             ) : (
                <SpotSearch map={map} spotList={spotList} />
             )}

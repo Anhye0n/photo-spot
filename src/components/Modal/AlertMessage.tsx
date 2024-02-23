@@ -4,8 +4,8 @@ import Modal from 'react-modal'
 
 export interface AlertModalType {
    type: string
-   modalOpen: boolean
    message: string
+   modalOpen: boolean
    setModalOpen: Function
 }
 
@@ -65,7 +65,7 @@ function AlertMessage(props: AlertModalType) {
          closeTimeoutMS={300}
       >
          <div className={styles['modal-flex']}>
-            <span className="material-symbols-outlined"> {props.type === 'warning' ? '#warning' : props.type === 'success' ? 'done' : ''} </span>
+            <span className="material-symbols-outlined"> {props.type === 'warning' ? 'warning' : props.type === 'success' ? 'done' : ''} </span>
             <div className={styles['warning-modal-message']}>
                <p>{props.message}</p>
             </div>

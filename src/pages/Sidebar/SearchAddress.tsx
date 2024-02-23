@@ -4,7 +4,17 @@ import markerImages from '@assets/images/marker_number_blue.png'
 
 const { kakao } = window
 
-function SearchAddress({ map, markers, setMarkers }: { map: any; markers: any; setMarkers: any }) {
+function SearchAddress({
+   map,
+   searchMarkers,
+   removeMarker,
+   setSearchMarkers,
+}: {
+   map: any
+   searchMarkers: any
+   removeMarker: Function
+   setSearchMarkers: Function
+}) {
    const [keyword, setKeyword] = useState('')
 
    // 장소 검색 객체를 생성합니다
@@ -131,7 +141,7 @@ function SearchAddress({ map, markers, setMarkers }: { map: any; markers: any; s
    }
 
    // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-   const addMarker = (position, idx, title) => {
+   const addMarker = (position, idx) => {
       let imageSrc = markerImages, // 마커 이미지 url, 스프라이트 이미지를 씁니다
          imageSize = new kakao.maps.Size(36, 40), // 마커 이미지의 크기
          imgOptions = {
@@ -147,7 +157,8 @@ function SearchAddress({ map, markers, setMarkers }: { map: any; markers: any; s
 
       marker.setMap(map) // 지도 위에 마커를 표출합니다
       // markers.push(marker) // 배열에 생성된 마커를 추가합니다
-      setMarkers((prev: any) => {
+
+      setSearchMarkers((prev: any) => {
          return [...prev, marker]
       })
 
@@ -155,13 +166,13 @@ function SearchAddress({ map, markers, setMarkers }: { map: any; markers: any; s
    }
 
    // 지도 위에 표시되고 있는 마커를 모두 제거합니다
-   const removeMarker = () => {
-      for (let i = 0; i < markers.length; i++) {
-         markers[i].setMap(null)
-      }
-      // markers = []
-      setMarkers([])
-   }
+   // const removeMarker = () => {
+   //    for (let i = 0; i < searchMarkers.length; i++) {
+   //       searchMarkers[i].setMap(null)
+   //    }
+   //    // markers = []
+   //    setSearchMarkers((prev) => [])
+   // }
 
    // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
    const displayPagination = (pagination) => {

@@ -1,7 +1,7 @@
 import styles from '@assets/css/spot-info.module.css'
 import QueryString from 'qs'
 import { useLocation } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { requestApi } from '@plugins/apiSetting.ts'
 import quotes_1 from '@assets/images/quotes_1.webp'
 import { SpotType } from '@src/App.tsx'
@@ -47,7 +47,7 @@ function SpotInfo({ map, modalOpen, setModalOpen }: { map: any; modalOpen: boole
             console.log(res)
             const moveLatLon = new kakao.maps.LatLng(res.data.spot_lat, res.data.spot_lng)
 
-            map.setCenter(moveLatLon)
+            map.panTo(moveLatLon)
 
             setSpotData((prev) => {
                return {
@@ -68,11 +68,22 @@ function SpotInfo({ map, modalOpen, setModalOpen }: { map: any; modalOpen: boole
          })
    }, [useLocation().search])
 
+   // 외부영역 클릭시 닫기
+   const modalRef = useRef<HTMLDivElement>(null)
+   useEffect(() => {
+      const handleClick = (e: MouseEvent) => {
+         if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+            setModalOpen(false)
+         }
+      }
+      window.addEventListener('mousedown', handleClick)
+      return () => window.removeEventListener('mousedown', handleClick)
+   }, [modalRef])
    return (
       <>
          {modalOpen && (
             <div className={styles['spot-info-out-box']}>
-               <div className={styles['spot-info-inner-box']}>
+               <div className={styles['spot-info-inner-box']} ref={modalRef}>
                   <div className={styles['modal-close-container']}>
                      <span className="material-symbols-outlined" onClick={() => setModalOpen(false)}>
                         {' '}
@@ -123,16 +134,17 @@ function SpotInfo({ map, modalOpen, setModalOpen }: { map: any; modalOpen: boole
                   </p>
                   <ResponsiveMasonry columnsCountBreakPoints={{ 350: 1, 750: 2, 900: 3 }}>
                      <Masonry gutter="15px">
-                        {spotData.images.map((path: any, index: number) =>
-                           !errorImages.includes(index) && (
-                              // 이미지 로딩에 실패하지 않았을 때
-                              <img
-                                 key={`${spotData.spotUUID}${index}`}
-                                 src={path}
-                                 alt={`Image ${spotData.spotUUID}${index}`}
-                                 onError={() => handleImageError(index)}
-                              />
-                           ),
+                        {spotData.images.map(
+                           (path: any, index: number) =>
+                              !errorImages.includes(index) && (
+                                 // 이미지 로딩에 실패하지 않았을 때
+                                 <img
+                                    key={`${spotData.spotUUID}${index}`}
+                                    src={path}
+                                    alt={`Image ${spotData.spotUUID}${index}`}
+                                    onError={() => handleImageError(index)}
+                                 />
+                              ),
                         )}
                      </Masonry>
                   </ResponsiveMasonry>
