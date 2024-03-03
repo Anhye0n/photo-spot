@@ -8,8 +8,10 @@ import SpotInfo from '@components/Modal/SpotInfo.tsx'
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import AppLayout from '@src/AppLayout.tsx'
 import InfoButton from '@pages/SideButton/InfoButton.tsx'
+import RouteChangeTracker from '@components/RouteChangeTracker.tsx'
+import MetaTag from '@components/SEOMetaTag.tsx'
 
-const { kakao } = window
+const { kakao }: any = window
 
 let map: any
 let geocoder: any
@@ -17,51 +19,65 @@ let geocoder: any
 export interface SpotType {
    spotUUID?: string
    spotName?: string
-   spotExplain?: string
+   spotExplain: string
    address: string
    roadAddress: string
    spotLat: number
    spotLng: number
 }
 
+// global.d.ts 파일을 생성하거나 기존에 존재하는 경우 수정합니다.
+declare global {
+   interface Window {
+      gtag: (...args: any[]) => void
+   }
+}
+
 function App() {
+   RouteChangeTracker()
+   const location = useLocation()
+
+   useEffect(() => {
+      // 페이지 이동을 감지하고 GA4에 페이지 뷰 이벤트 전송
+      window.gtag('config', 'G-50D06EWCBZ', { page_path: location.pathname })
+   }, [location])
    const [isView, setIsView] = useState(false)
    const [markers, setMarkers] = useState<any[]>([])
 
-   const [spotList, setSpotList] = useState([])
+   const [spotList, setSpotList] = useState<any[]>([])
    const [modalOpen, setModalOpen] = useState(true)
 
    const navigate = useNavigate()
 
    useEffect(() => {
-      const script = document.createElement('script')
-      script.async = true
-      script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=f21cd87f2a97826468d68560fd5dcf1f&libraries=services`
-      document.head.appendChild(script)
+      // const script = document.createElement('script')
+      // script.async = true
+      // script.src = `//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=f21cd87f2a97826468d68560fd5dcf1f&libraries=services`
+      // document.head.appendChild(script)
 
-      script.addEventListener('load', () => {
-         kakao.maps.load(() => {
-            const container = document.getElementById('map')
+      // script.addEventListener('load', () => {
+      kakao.maps.load(() => {
+         const container = document.getElementById('map')
 
-            const options = {
-               center: new kakao.maps.LatLng(37.56628407757217, 126.98144819978414),
+         const options = {
+            center: new kakao.maps.LatLng(37.56628407757217, 126.98144819978414),
 
-               level: 3, // 지도 확대 레벨
-            }
-            map = new kakao.maps.Map(container, options)
-            geocoder = new kakao.maps.services.Geocoder()
+            level: 3, // 지도 확대 레벨
+         }
+         map = new kakao.maps.Map(container, options)
+         geocoder = new kakao.maps.services.Geocoder()
 
-            setTimeout(() => {
-               setIsView(true)
-            }, 100)
+         setTimeout(() => {
+            setIsView(true)
+         }, 100)
 
-            kakao.maps.event.addListener(map, 'idle', () => {
-               getSpot()
-            })
-
+         kakao.maps.event.addListener(map, 'idle', () => {
             getSpot()
          })
+
+         getSpot()
       })
+      // })
    }, [])
 
    const getSpot = async () => {
@@ -83,15 +99,14 @@ function App() {
          // lat: 가로, lon; 세로
          addMarker(
             new kakao.maps.LatLng(regionArray.data[index].spot_lat, regionArray.data[index].spot_lng),
-            index,
             regionArray.data[index],
          )
       }
 
-      setSpotList((prev) => [...regionArray.data])
+      setSpotList(() => [...regionArray.data])
    }
 
-   const addMarker = (position, idx, spotData) => {
+   const addMarker = (position: any, spotData: any) => {
       let imageSrc = markerImages, // 마커이미지의 주소입니다
          // 마커이미지의 크기입니다
          imageSize = new kakao.maps.Size(44, 60),
@@ -109,8 +124,6 @@ function App() {
       marker.setMap(map) // 지도 위에 마커를 표출합니다
       // markers.push(marker) // 배열에 생성된 마커를 추가합니다
 
-
-
       setMarkers((prev: any) => {
          return [...prev, marker]
       })
@@ -127,10 +140,11 @@ function App() {
       for (let i = 0; i < markers.length; i++) {
          markers[i].setMap(null)
       }
-      setMarkers((prev)=> [])
+      setMarkers(() => [])
    }
    return (
       <>
+         {/*<MetaTag title="포토 스팟" description="사진 명소들을 모아볼 수 있습니다." url="https://photo-spot.info" />*/}
          <Routes>
             <Route path="/" element={<AppLayout />}>
                <Route
@@ -142,7 +156,7 @@ function App() {
          {/*{!!queryData.spotName && <SpotInfo spotList={spotList} />}*/}
          {isView ? <InfoButton /> : null}
          {isView ? <AddButton map={map} geocoder={geocoder} /> : null}
-         {isView ? <SidebarLayout map={map} markers={markers} setMarkers={setMarkers} spotList={spotList} removeMarker={removeMarker}/> : null}
+         {isView ? <SidebarLayout map={map} spotList={spotList} /> : null}
       </>
    )
 }

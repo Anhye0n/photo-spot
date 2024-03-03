@@ -91,6 +91,7 @@
 }
 .spot-info-inner-explain {
     font-family: "NotoSansKR-Regular-4", serif;
+    white-space: pre-line;
     background: none;
     width: 95%;
     height: 115px;
@@ -99,7 +100,7 @@
     padding: 10px;
     resize: none;
     word-wrap: break-word;
-    text-align: center;
+    text-align: left;
     overflow-y: auto;
 }
 

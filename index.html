@@ -1,17 +1,35 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0"/>
-    <script type="text/javascript"
-            src="//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=f21cd87f2a97826468d68560fd5dcf1f&libraries=services"></script>
-    <title>photo spot</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+   <meta charset='UTF-8'>
+   <title>포토 스팟</title>
+
+   <meta name="description" content="사진 명소들을 모아볼 수 있습니다." />
+   <meta name="keywords" content="사진 명소, 사진, 카메라, 여행, 장소, 포토 스팟, 사진, 명소">
+
+   <meta property="og:type" content="website" />
+   <meta property="og:title" content="포토 스팟" />
+   <meta property="og:site_name" content="포토 스팟" />
+   <meta property="og:description" content="사진 명소들을 모아볼 수 있습니다." />
+   <meta property="og:image" content="https://photo-spot.info/favicon.png" />
+   <meta property="og:url" content="https://photo-spot.info" />
+
+   <link rel='icon' type='image/svg+xml' href='/favicon.ico' />
+   <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+   <script type='text/javascript'
+           src='//dapi.kakao.com/v2/maps/sdk.js?autoload=false&appkey=f21cd87f2a97826468d68560fd5dcf1f&libraries=services'></script>
+   <!-- Google tag (gtag.js) -->
+   <script async src="https://www.googletagmanager.com/gtag/js?id=G-50D06EWCBZ"></script>
+   <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-50D06EWCBZ');
+   </script>
+</head>
+<body>
+<div id='root'></div>
+<script type='module' src='/src/main.tsx'></script>
+</body>
 </html>

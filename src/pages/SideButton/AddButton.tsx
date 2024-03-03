@@ -7,7 +7,7 @@ import plusPin from '@assets/images/plus-pin.png'
 import { SpotType } from '@src/App.tsx'
 import AlertMessage from '@components/Modal/AlertMessage.tsx'
 
-const { kakao } = window
+const { kakao }: any = window
 
 function AddButton({ map, geocoder }: { map: any; geocoder: any }) {
    const [addButton, setAddButton] = useState(false)
@@ -28,11 +28,11 @@ function AddButton({ map, geocoder }: { map: any; geocoder: any }) {
       spotLng: 0,
    })
 
-   const clickFunction = (mouseEvent) => {
+   const clickFunction = (mouseEvent: any) => {
       let latLng = mouseEvent.latLng
       markersInAddButton.setPosition(latLng)
 
-      searchDetailAddrFromCoords(latLng, (result, status) => {
+      searchDetailAddrFromCoords(latLng, (result: any, status: any) => {
          if (status === kakao.maps.services.Status.OK) {
             setAddSpot((prev) => ({
                ...prev,
@@ -75,7 +75,7 @@ function AddButton({ map, geocoder }: { map: any; geocoder: any }) {
       }
    }, [addButton])
 
-   const searchDetailAddrFromCoords = (coords, callback) => {
+   const searchDetailAddrFromCoords = (coords: any, callback: any) => {
       geocoder.coord2Address(coords.getLng(), coords.getLat(), callback)
    }
 

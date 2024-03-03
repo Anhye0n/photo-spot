@@ -3,29 +3,25 @@ import '@assets/css/spot-search.css'
 import { truncateText } from '@plugins/truncateText.ts'
 import quotes_1 from '@assets//images/quotes_1.webp'
 import quotes_2 from '@assets//images/quotes_2.webp'
-import { naverApi } from '@plugins/apiSetting.ts'
-import { useNavigate } from 'react-router-dom'
+import { requestApi } from '@plugins/apiSetting.ts'
 
-const { kakao } = window
+const { kakao }: any = window
 
 function SpotSearch({ map, spotList }: { map: any; spotList: any }) {
+   const [isSearching, setIsSearching] = useState(false)
    const [spotInput, setSpotInput] = useState('')
+   const [searchResult, setSearchResult] = useState<any[]>([])
 
-   const navigate = useNavigate()
-
-   const getImage = () => {
-      naverApi
-         .get('', {
+   const searchSpot = (searchText: string) => {
+      requestApi
+         .get('/spot/search_spot', {
             params: {
-               query: encodeURI('성수구름다리'),
-               display: 1,
-               start: 1,
-               sort: 'sim',
-               filter: 'all',
+               searchText: searchText,
             },
          })
          .then((res) => {
-            console.log(res)
+            setIsSearching(true)
+            setSearchResult(() => [...res.data])
          })
    }
 
@@ -76,18 +72,30 @@ function SpotSearch({ map, spotList }: { map: any; spotList: any }) {
                   onChange={(e) => {
                      setSpotInput(e.target.value)
                   }}
-                  // onKeyUp={(e) => {
-                  //    if (e.key === 'Enter') {
-                  //       searchPlaces()
-                  //    }
-                  // }}
+                  onKeyUp={(e) => {
+                     if (e.key === 'Enter') {
+                        searchSpot(spotInput)
+                     }
+                  }}
                />
             </div>
          </div>
+         {isSearching && (
+            <p id="spot-search-close">
+               <span
+                  onClick={() => {
+                     setIsSearching(false)
+                     setSpotInput('')
+                  }}
+               >
+                  검색 종료
+               </span>
+            </p>
+         )}
          <div id="spot-search-result-container">
-            {spotList.map((data: any) => (
-               <SpotSearchBox key={data.spot_uuid} spotData={data} />
-            ))}
+            {isSearching
+               ? searchResult.map((data: any) => <SpotSearchBox key={data.spot_uuid} spotData={data} />)
+               : spotList.map((data: any) => <SpotSearchBox key={data.spot_uuid} spotData={data} />)}
          </div>
       </>
    )

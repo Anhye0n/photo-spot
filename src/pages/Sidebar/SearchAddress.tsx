@@ -2,16 +2,14 @@ import { useState } from 'react'
 import '@assets/css/search-address.css'
 import markerImages from '@assets/images/marker_number_blue.png'
 
-const { kakao } = window
+const { kakao }: any = window
 
 function SearchAddress({
    map,
-   searchMarkers,
    removeMarker,
    setSearchMarkers,
 }: {
    map: any
-   searchMarkers: any
    removeMarker: Function
    setSearchMarkers: Function
 }) {
@@ -35,7 +33,7 @@ function SearchAddress({
    }
 
    // 장소검색이 완료됐을 때 호출되는 콜백함수 입니다
-   const placesSearchCB = (data, status, pagination) => {
+   const placesSearchCB = (data: any, status: any, pagination: any) => {
       if (status === kakao.maps.services.Status.OK) {
          // 정상적으로 검색이 완료됐으면
          // 검색 목록과 마커를 표출합니다
@@ -53,12 +51,11 @@ function SearchAddress({
    }
 
    // 검색 결과 목록과 마커를 표출하는 함수입니다
-   function displayPlaces(places) {
-      let listEl = document.getElementById('placesList'),
-         menuEl = document.getElementById('menu_wrap'),
-         fragment = document.createDocumentFragment(),
-         bounds = new kakao.maps.LatLngBounds(),
-         listStr = ''
+   function displayPlaces(places: any) {
+      let listEl: any = document.getElementById('placesList'),
+         menuEl: any = document.getElementById('menu_wrap'),
+         fragment: any = document.createDocumentFragment(),
+         bounds = new kakao.maps.LatLngBounds()
 
       // 검색 결과 목록에 추가된 항목들을 제거합니다
       removeAllChildNods(listEl)
@@ -109,7 +106,7 @@ function SearchAddress({
    }
 
    // 검색결과 항목을 Element로 반환하는 함수입니다
-   const getListItem = (index, places) => {
+   const getListItem = (index: number, places: any) => {
       let el = document.createElement('li'),
          itemStr =
             '<span class="markerbg marker_' +
@@ -141,7 +138,7 @@ function SearchAddress({
    }
 
    // 마커를 생성하고 지도 위에 마커를 표시하는 함수입니다
-   const addMarker = (position, idx) => {
+   const addMarker = (position: any, idx: any) => {
       let imageSrc = markerImages, // 마커 이미지 url, 스프라이트 이미지를 씁니다
          imageSize = new kakao.maps.Size(36, 40), // 마커 이미지의 크기
          imgOptions = {
@@ -175,10 +172,10 @@ function SearchAddress({
    // }
 
    // 검색결과 목록 하단에 페이지번호를 표시는 함수입니다
-   const displayPagination = (pagination) => {
-      let paginationEl = document.getElementById('pagination'),
+   const displayPagination = (pagination: any) => {
+      let paginationEl: any = document.getElementById('pagination'),
          fragment = document.createDocumentFragment(),
-         i
+         i: any
 
       // 기존에 추가된 페이지번호를 삭제합니다
       while (paginationEl.hasChildNodes()) {
@@ -207,7 +204,7 @@ function SearchAddress({
 
    // 검색결과 목록 또는 마커를 클릭했을 때 호출되는 함수입니다
    // 인포윈도우에 장소명을 표시합니다
-   const displayInfowindow = (marker, title) => {
+   const displayInfowindow = (marker: any, title: string) => {
       let content = '<div style="padding:5px;z-index:1;">' + title + '</div>'
 
       infowindow.setContent(content)
@@ -215,7 +212,7 @@ function SearchAddress({
    }
 
    // 검색결과 목록의 자식 Element를 제거하는 함수입니다
-   const removeAllChildNods = (el) => {
+   const removeAllChildNods = (el: any) => {
       while (el.hasChildNodes()) {
          el.removeChild(el.lastChild)
       }

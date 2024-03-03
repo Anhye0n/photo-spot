@@ -31,27 +31,36 @@ label[for='spot-input'] {
     margin-top: 20px;
 }
 
-#spot-search-result-container hr{
+#spot-search-result-container hr {
     width: 90%;
     border: 1px solid #e0e0e0;
     margin-top: 0;
     margin-bottom: 0;
 }
 
+#spot-search-close {
+    text-align: center;
+}
+
+#spot-search-close span {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
 .spot-search-result-box {
     padding: 20px 25px 15px 25px;
 }
 
-.spot-search-result-title-box{
+.spot-search-result-title-box {
     display: flex;
     justify-content: space-between;
 }
 
-.spot-search-result-title-box div img{
+.spot-search-result-title-box div img {
     width: 20px;
 }
 
-.spot-search-result-title-box div:nth-child(3){
+.spot-search-result-title-box div:nth-child(3) {
     align-self: flex-end;
 }
 
@@ -64,7 +73,7 @@ label[for='spot-input'] {
     font-family: "NotoSansKR-SemiBold-6", serif;
 }
 
-.spot-search-result-address-title{
+.spot-search-result-address-title {
     font-size: 0.9em;
     margin-top: 5px;
     margin-bottom: 5px;

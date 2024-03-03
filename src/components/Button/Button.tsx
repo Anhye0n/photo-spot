@@ -6,17 +6,22 @@ interface ButtonPropsType {
    content?: string
    width?: string
    height?: string
-   // padding: string
    fontSize?: string
    color?: string
    background?: string
    spotData?: SpotType
+   setSpotData: Function
    setModalOpen?: Function
    setAlertModalOpen?: Function
    setAlertModalOptions?: Function
 }
 
-const uploadSpot = (spotData, setModalOpen, setAlertModalOpen, setAlertModalOptions) => {
+const uploadSpot = (
+   spotData: SpotType,
+   setModalOpen: Function,
+   setAlertModalOpen: Function,
+   setAlertModalOptions: Function,
+) => {
    requestApi
       .post('/spot/upload', {
          userName: 'anhye0n',
@@ -29,10 +34,10 @@ const uploadSpot = (spotData, setModalOpen, setAlertModalOpen, setAlertModalOpti
       })
       .then((res) => {
          setModalOpen(false)
-         setAlertModalOptions((prev) => ({
+         setAlertModalOptions((prev: any) => ({
             ...prev,
             type: 'success',
-            alertMessage: '추가 완료되었습니다.'
+            alertMessage: '추가 완료되었습니다.',
          }))
          setAlertModalOpen(true)
          console.log(res)
@@ -50,6 +55,7 @@ function Button(props: ButtonPropsType) {
       fontSize: props.fontSize,
       color: props.color,
       background: props.background,
+      setSpotData: props.setSpotData,
    }
 
    return (
@@ -59,7 +65,19 @@ function Button(props: ButtonPropsType) {
             role="button"
             style={buttonStyle}
             onClick={() => {
-               uploadSpot(props.spotData, props.setModalOpen, props.setAlertModalOpen, props.setAlertModalOptions)
+               if (props.spotData && props.setModalOpen && props.setAlertModalOpen && props.setAlertModalOptions) {
+                  uploadSpot(props.spotData, props.setModalOpen, props.setAlertModalOpen, props.setAlertModalOptions)
+               }
+               props.setSpotData((prev: any) => ({
+                  ...prev,
+                  spotUUID: '',
+                  spotName: '',
+                  spotExplain: '',
+                  address: '',
+                  roadAddress: '',
+                  spotLat: '',
+                  spotLng: '',
+               }))
             }}
          >
             {props.content}

@@ -120,7 +120,7 @@ function InfoModal(props: ModalOptionsType) {
                <p>{props.spotData.address}</p>
             </div>
             <div className={styles['spot-add-upload']}>
-               <Button content='업로드' fontSize='1.2em' spotData={props.spotData} setModalOpen={props.setModalOpen}
+               <Button content='업로드' fontSize='1.2em' spotData={props.spotData} setSpotData={props.setSpotData} setModalOpen={props.setModalOpen}
                        setAlertModalOpen={props.setAlertModalOpen} setAlertModalOptions={props.setAlertModalOptions}/>
             </div>
          </div>

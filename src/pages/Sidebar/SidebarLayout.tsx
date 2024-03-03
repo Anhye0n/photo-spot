@@ -4,35 +4,22 @@ import SearchAddress from '@pages/Sidebar/SearchAddress.tsx'
 import '@assets/css/sidebar-layout.css'
 import SpotSearch from '@pages/Sidebar/SpotSearch.tsx'
 
-function SidebarLayout({
-   map,
-   markers,
-   setMarkers,
-   spotList,
-}: {
-   map: any
-   markers: any
-   setMarkers: Function
-   spotList: any
-}) {
+function SidebarLayout({ map, spotList }: { map: any; spotList: any }) {
    const [menuName, setMenuName] = useState('spot')
    const [isShowSidebar, setIsShowSidebar] = useState(true)
 
    const [searchMarkers, setSearchMarkers] = useState<any[]>([])
 
    useEffect(() => {
-
       removeMarker()
-
    }, [menuName])
 
    const removeMarker = () => {
-      if (searchMarkers.length !==0) {
+      if (searchMarkers.length !== 0) {
          for (let i = 0; i < searchMarkers.length; i++) {
-
-            searchMarkers[i].setMap(null);
+            searchMarkers[i].setMap(null)
          }
-         setSearchMarkers((prev)=> [])
+         setSearchMarkers(() => [])
       }
    }
 
@@ -66,7 +53,7 @@ function SidebarLayout({
                   onClick={() => {
                      setMenuName('location')
                   }}
-                  style={menuName === 'location' ? activeButton : null}
+                  style={menuName === 'location' ? activeButton : {}}
                >
                   <p>
                      <span className="material-symbols-outlined"> location_searching </span>
@@ -78,7 +65,7 @@ function SidebarLayout({
                   onClick={() => {
                      setMenuName('spot')
                   }}
-                  style={menuName === 'spot' ? activeButton : null}
+                  style={menuName === 'spot' ? activeButton : {}}
                >
                   <p>
                      <span className="material-symbols-outlined"> location_on </span>
@@ -87,7 +74,11 @@ function SidebarLayout({
                </div>
             </div>
             {menuName === 'location' ? (
-               <SearchAddress map={map} searchMarkers={searchMarkers} setSearchMarkers={setSearchMarkers} removeMarker={removeMarker}/>
+               <SearchAddress
+                  map={map}
+                  setSearchMarkers={setSearchMarkers}
+                  removeMarker={removeMarker}
+               />
             ) : (
                <SpotSearch map={map} spotList={spotList} />
             )}
